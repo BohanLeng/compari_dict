@@ -11,7 +11,7 @@ Currently supported editor: Pycharm built-in markdown editor
 
 
 ## To include your API keys
-Create a configuration file `api_keys.ini':
+Create a configuration file `api_keys.ini`:
 ```ini
 [API_KEYS]
 GOOGLE_TRANS_API = YOUR_GOOGLE_API

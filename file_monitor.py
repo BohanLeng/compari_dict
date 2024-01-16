@@ -10,10 +10,10 @@ from multi_translator import MultiTranslator
 
 
 head = '@'
-engine = 'Google Trans'
+engine = 'DeepL'
 # 'Google Trans' / 'DeepL' / 'OpenAI'
 source_language = 'de'
-target_languages = ['en', 'fr']
+target_languages = ['en-gb', 'fr']
 
 
 class NotebookProcessor(LoggingEventHandler):

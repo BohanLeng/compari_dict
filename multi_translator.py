@@ -10,18 +10,20 @@ class MultiTranslator:
         config = ConfigParser()
         config.read('api_keys.ini')
         if self.engine == 'Google Trans':
-            import google_translate
-            self.translate_call = google_translate.translate_text
-            self.api_key = config.get('API_KEYS', 'GOOGLE_TRANS_API')
+            api_key = config.get('API_KEYS', 'GOOGLE_TRANS_API')
+            from google_translate import GoogleTranslator
+            self.the_translator = GoogleTranslator(api_key)
         elif self.engine == 'DeepL':
-            # self.api_key = config.get('API_KEYS', 'DEEPL_API')    # TODO
-            pass
+            api_key = config.get('API_KEYS', 'DEEPL_API')
+            from deepl_translate import DeepLTranslator
+            self.the_translator = DeepLTranslator(api_key)
         elif self.engine == 'OpenAI':
-            # self.api_key = config.get('API_KEYS', 'DEEPL_API')    # TODO
+            api_key = config.get('API_KEYS', 'DEEPL_API')    # TODO
             pass
+        self.translate_call = self.the_translator.translate_request
 
-    def translate(self, word):
+    def translate(self, text):
         results = []
         for lang in self.target_langues:
-            results.append(self.translate_call(self.api_key, word, self.src_lang, lang))
+            results.append(self.translate_call(text, self.src_lang, lang))
         return results
