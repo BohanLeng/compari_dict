@@ -18,7 +18,7 @@ class GoogleTranslator(BaseTranslator):
         response = requests.get(self.url, params=params)
         if response.status_code == 200:
             translation = response.json()['data']['translations'][0]['translatedText']
-            print(f"{text} -> {translation}\t({source_language} -> {target_language})")
+            print(f"{text} -> {translation}  ({source_language} -> {target_language})")
             return translation
         else:
             print("Translation Failed:", response.json())

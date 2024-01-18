@@ -20,7 +20,7 @@ class DeepLTranslator(BaseTranslator):
         response = requests.post(self.url, json=request_data, headers=self.headers)
         if response.status_code == 200:
             translation = response.json()['translations'][0]['text']
-            print(f"{text} -> {translation}\t({source_language} -> {target_language})")
+            print(f"{text} -> {translation}  ({source_language} -> {target_language})")
             return translation
         else:
             print("Translation Failed:", response.json())

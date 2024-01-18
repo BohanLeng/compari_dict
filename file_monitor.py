@@ -7,6 +7,7 @@ import difflib
 import os
 import fcntl
 from multi_translator import MultiTranslator
+import formatter
 
 
 head = '@'
@@ -57,7 +58,7 @@ class NotebookProcessor(LoggingEventHandler):
                     word = line.strip()[1:]
                     results = self.translator.translate(word)
                     if results:
-                        self._new_content[i] = format_results(word, results)
+                        self._new_content[i] = formatter.format_line_results(word, results)
                     else:
                         print("No translation results.")
             self.ignore_next_change = True
@@ -68,15 +69,6 @@ class NotebookProcessor(LoggingEventHandler):
         else:
             print("Detected No line to be translated, waiting for next change...")
         self._previous_content = self._new_content
-
-
-def format_results(word, results):
-    md_table = f"\n|{word}|"
-    for result in results:
-        assert result, "No result to format"
-        md_table = md_table + result + '|'
-    md_table = md_table + '\n|-|' + len(results) * '-|' + '\n\n'
-    return md_table
 
 
 if __name__ == "__main__":
