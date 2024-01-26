@@ -15,7 +15,8 @@ class DeepLTranslator(BaseTranslator):
         request_data = {
             "text": [text],
             "source_lang": source_language,
-            "target_lang": target_language
+            "target_lang": target_language,
+            "preserve_formatting": True
         }
         response = requests.post(self.url, json=request_data, headers=self.headers)
         if response.status_code == 200:

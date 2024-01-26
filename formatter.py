@@ -3,7 +3,7 @@ def format_line_results(word, results):
     for result in results:
         assert result, "No result to format" # TODO single @ will cause assertion fail
         md_table = md_table + result + '|'
-    md_table = md_table + '\n|-|' + len(results) * '-|' + '\n\n'
+    md_table = md_table + '\n|-|' + len(results) * '-|' + '\n'
     return md_table
 
 
