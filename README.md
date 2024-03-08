@@ -8,24 +8,39 @@ This tool provides you a shortcut instead of looking up multiple dictionaries, o
 ## Usage
 ### Original text:
 Comment te dire adieu ?
+
 @Goodbye
 
 Was ist das?
+
 @This is a translator to multiple languages
 
 Something to drink?
+
 @@
+
 orange juice
+
 apple juice
+
 Coca-Cola
+
 water
+
 coffee
+
 tea
+
 cappuccino
+
 red wine
+
 white wine
+
 milk
+
 beer
+
 iced tea
 
 
