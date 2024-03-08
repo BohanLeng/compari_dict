@@ -7,7 +7,7 @@ class MultiTranslator:
         self.src_lang = src_lang
         self.target_langues = target_langues
         self.engine = engine
-        if api_config_file and os.path.exists(api_config_file):
+        if api_config_file:
             config = ConfigParser()
             config.read(api_config_file)
             if self.engine == 'Google Trans':

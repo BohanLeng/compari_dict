@@ -1,18 +1,77 @@
 # compari_dict
 
-developed by Bohan Leng
+Learning languages can be fun when comparing with other languages. Observe the similarities and differences between same expressions in different languages help you understand and memorise them better.
+
+This tool provides you a shortcut instead of looking up multiple dictionaries, or hitting translate button multiple times and pasting to your notes. You don't need to go through any difficulties before you can feel the beautiful nuances of languages. 
 
 
+## Usage
+### Original text:
+Comment te dire adieu ?
+@Goodbye
 
-## Usage: 
-Typing and saving file with '@something', the script will translate 'something' into desired language(s) and write back into file in Markdown table format. 
+Was ist das?
+@This is a translator to multiple languages
 
-Known supported editors: 
+Something to drink?
+@@
+orange juice
+apple juice
+Coca-Cola
+water
+coffee
+tea
+cappuccino
+red wine
+white wine
+milk
+beer
+iced tea
 
-- Pycharm built-in markdown editor
-- Sublime Text
-- **Obsidian (Recommended)**
 
+### Execute:
+`$python3 converter.py README.md en de fr zh -e "Google Trans"`
+
+### Output:
+Comment te dire adieu ?
+
+|Goodbye|Auf Wiedersehen|Au revoir|再见|
+|-|-|-|-|
+
+Was ist das ?
+
+|This is a translator to multiple languages|Dies ist ein Übersetzer für mehrere Sprachen|Ceci est un traducteur vers plusieurs langues|这是多语言翻译器|
+|-|-|-|-|
+
+Something to drink?
+
+|en|de|fr|zh|
+|-|-|-|-|
+|orange juice|Orangensaft|jus d&#39;orange|橙汁|
+|apple juice|Apfelsaft|jus de pomme|苹果汁|
+|Coca-Cola|Coca-Cola|Coca-Cola|可口可乐|
+|water|Wasser|eau|水|
+|coffee|Kaffee|café|咖啡|
+|tea|Tee|thé|茶|
+|cappuccino|Cappuccino|cappuccino|卡布奇诺|
+|red wine|Rotwein|vin rouge|红酒|
+|white wine|Weißwein|vin blanc|白酒|
+|milk|Milch|lait|牛奶|
+|beer|Bier|bière|啤酒|
+|iced tea|Eistee|thé glacé|冰茶|
+
+## Common text editors' support
+
+This feature converts text file in the background, so this requires editors that supports loading file from disk automatically.
+
+Some editors are tested.
+
+- **Obsidian &check;** 
+- Sublime Text &check; 
+- Typora &cross;
+- Pycharm built-in markdown editor &check; 
+
+Obsidian's community plugins allow us to execute command inside terminals embedded in Obsidian editor window. Moreover, this project is planned to be an Obsidian plugin.  
 
 ## To include your API keys
 - Create a configuration file `api_keys.ini`:

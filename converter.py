@@ -1,19 +1,36 @@
+import os
 import sys
+import argparse
 from multi_translator import MultiTranslator
 import formatter
 
 head = '@'
-engine = 'Google Trans'
-# 'Google Trans' / 'DeepL' / 'OpenAI'
-source_language = 'de'
-target_languages = ['en-gb', 'fr']
-
+default_engine = 'Google Trans'
+segment_symbol = '+'
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
-        exit("The file to convert to be specified! Exiting...")
-    mt_translator = MultiTranslator(engine, source_language, target_languages)
-    file_path = sys.argv[1]
+    parser = argparse.ArgumentParser(description='Converting texts into multi-linguistic tables.')
+    parser.add_argument('file_to_process', type=str, help='Path to the file to process')
+    # source_language = 'de'
+    parser.add_argument('source_language', type=str, help='Code of source language')
+    # target_languages = ['en-gb', 'fr']
+    parser.add_argument('target_languages', type=str, nargs='+', help='Codes of target language code')
+    # 'Google Trans' / 'DeepL' / 'OpenAI'
+    parser.add_argument('--translation_engine', '-e', type=str, help='Google Trans / DeepL')
+    # eg. api_keys.ini
+    parser.add_argument('--api_config_file', '-c', type=str, help="Config file containing api keys")
+    args = parser.parse_args()
+    source_language = args.source_language
+    target_languages = args.target_languages
+    if args.translation_engine and args.translation_engine in ['Google Trans', 'DeepL', 'OpenAI']:
+        engine = args.translation_engine
+    else:
+        exit('Unsupported engine')
+    if args.api_config_file and os.path.exists(args.api_config_file):
+        mt_translator = MultiTranslator(engine, source_language, target_languages, args.api_config_file)
+    else:
+        mt_translator = MultiTranslator(engine, source_language, target_languages)
+    file_path = args.file_to_process
     with open(file_path, 'r') as file:
         content = file.readlines()
         # Detect multiple lines starting with a 'head * 2' line
@@ -35,13 +52,13 @@ if __name__ == "__main__":
         translated_sections = []
         for section in sections:
             words = [line.strip() for line in section[1:]]
-            words_combined = '+'.join(words)
+            words_combined = segment_symbol.join(words)
             results_combined = mt_translator.translate(words_combined)
             if results_combined:
-                results_matrix = [col.split('+') for col in results_combined]
+                results_matrix = [col.split(segment_symbol) for col in results_combined]
                 for col in results_matrix:
                     assert len(words) == len(col), "Some words are missing while translation. Exiting..."
-                formatted_section = formatter.format_table_results(words, results_matrix)
+                formatted_section = formatter.format_table_results(words, results_matrix, source_language, target_languages)
                 translated_sections.append(formatted_section)
     with open(file_path, 'r') as file:
         content = file.readlines()
@@ -70,11 +87,11 @@ if __name__ == "__main__":
         # now already dealt with.
         # Starting processing single words
         words = [line.strip()[1:] for line in content if line.startswith(head)]
-        words_combined = '+'.join(words)
+        words_combined = segment_symbol.join(words)
         results_combined = mt_translator.translate(words_combined)
         if results_combined:
             translated_lines = []
-            results_matrix = [col.split('+') for col in results_combined]
+            results_matrix = [col.split(segment_symbol) for col in results_combined]
             # for col in results_matrix:
             #     assert len(words) == len(col), "Some words are missing while translation. Exiting..."
             for i, word in enumerate(words):
