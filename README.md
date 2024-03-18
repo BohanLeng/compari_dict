@@ -4,9 +4,17 @@ Learning languages can be fun when comparing with other languages. Observe the s
 
 This tool provides you a shortcut instead of looking up multiple dictionaries, or hitting translate button multiple times and pasting to your notes. You don't need to go through any difficulties before you can feel the beautiful nuances of languages. 
 
+## Supported tranlation Engines:
+- [x] [Google Cloud Translation](https://cloud.google.com/translate/)
+- [x] [DeepL Translator](https://www.deepl.com/pro-api?cta=header-pro-api)
+- [ ] [OpenAI](https://platform.openai.com)
+
 
 ## Usage
-### Original text:
+### Original text
+
+>  NOTE: In source mode of Markdown editors, there should be no blank line between lines. 
+
 Comment te dire adieu ?
 
 @Goodbye
@@ -74,6 +82,7 @@ Something to drink?
 |milk|Milch|lait|牛奶|
 |beer|Bier|bière|啤酒|
 |iced tea|Eistee|thé glacé|冰茶|
+
 
 ## Common text editors' support
 
